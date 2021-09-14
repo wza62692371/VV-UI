@@ -12,6 +12,7 @@ import MetaInfo from './meta-info/index'
 import WAlert from './alert/index'
 import WLoadingBar from './loading-bar/index'
 import Skeleton from './skeleton/index'
+import WCc from './cc/index'
 
 const components = [
   WButton,
@@ -21,7 +22,8 @@ const components = [
   WShowMore,
   WLimitTextArea,
   WAlert,
-  Skeleton
+  Skeleton,
+  WCc
 ]
 
 const install = function(Vue) {
@@ -36,6 +38,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
+  version: '0.0.1',
   install,
   WButton,
   WRow,

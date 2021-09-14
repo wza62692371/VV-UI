@@ -1,0 +1,119 @@
+@charset "UTF-8";
+@import "./common/var.less";
+
+.w-col-1, .w-col-2, .w-col-3, .w-col-4, .w-col-5, .w-col-6, .w-col-7, .w-col-8, .w-col-9, .w-col-10, .w-col-11, .w-col-12, .w-col-13, .w-col-14, .w-col-15, .w-col-16, .w-col-17, .w-col-18, .w-col-19, .w-col-20, .w-col-21, .w-col-22, .w-col-23, .w-col-24 {
+  float: left;
+  box-sizing: border-box;
+}
+.w-col-0 {
+  width: 0;
+}
+
+.generate-widths(@i) when (@i <= 24) {
+  @cc: calc(100% / 24 * @i);
+  .w-col-@{i} {
+    width: @cc;
+  }
+  .w-col-offset-@{i} {
+    margin-left: @cc;
+  }
+  .w-col-pull-@{i} {
+    position: relative;
+    right: @cc;
+  }
+  .w-col-push-@{i} {
+    position: relative;
+    left: @cc;
+  }
+  .generate-widths((@i + 1));
+}
+.generate-widths(1);
+
+
+@media (max-width: 768px) {
+  .generate-c1 (@i) when (@i < 24) {
+    @cc: calc(100% / 24 * @i);
+    .w-col-xs-@{i} {
+      width: @cc;
+    }
+    .w-col-xs-offset-@{i} {
+      margin-left: @cc;
+    }
+    .w-col-xs-pull-@{i} {
+      position: relative;
+      right: @cc;
+    }
+    .w-col-xs-push-@{i} {
+      position: relative;
+      left: @cc;
+    }
+    .generate-c1((@i + 1));
+  }
+  .generate-c1(1);
+}
+
+@media (min-width: 768px) {
+  .generate-c2(@i) when (@i < 24) {
+      @cc: calc(100% / 24 * @i);
+      .w-col-sm-@{i} {
+        width: @cc;
+      }
+      .w-col-sm-offset-@{i} {
+        margin-left: @cc;
+      }
+      .w-col-sm-pull-@{i} {
+        position: relative;
+        right: @cc;
+      }
+      .w-col-sm-push-@{i} {
+        position: relative;
+        left:  @cc;
+     }
+    .generate-c2((@i + 1));
+  }
+  .generate-c2(1);
+}
+
+
+@media (min-width: 992px) {
+  .generate-c3 (@i) when (@i < 24) {
+    @cc: calc(100% / 24 * @i);
+    .w-col-md-@{i} {
+      width:  @cc
+    }
+    .w-col-md-offset-@{i} {
+      margin-left:  @cc;
+    }
+    .w-col-md-pull-@{i} {
+      position: relative;
+      right:  @cc;
+    }
+    .w-col-md-push-@{i} {
+      position: relative;
+      left:  @cc;
+    }
+    .generate-c3((@i + 1));
+  }
+  .generate-c3(1);
+}
+@media (min-width: 1200px) {
+  .generate-c4 (@i) when (@i < 24) {
+    @cc: calc(100% / 24 * @i);
+    .w-col-lg-@{i} {
+      width:  @cc;
+    }
+    .w-col-lg-offset-@{i} {
+      margin-left:  @cc;
+    }
+    .w-col-lg-pull-@{i} {
+      position: relative;
+      right: @cc;
+    }
+    .w-col-lg-push-@{i} {
+      position: relative;
+      left:  @cc;
+    }
+    .generate-c4((@i + 1));
+  }
+  .generate-c4(1);
+}

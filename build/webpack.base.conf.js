@@ -3,11 +3,15 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const webpack = require('webpack')
 
 const MarkdownItContainer = require('markdown-it-container')
+// const MarkdownItAnchor = require('markdown-it-anchor')
 const striptags = require('./strip-tags')
-
 const vueMarkdown = {
+  preset: 'default',
+  breaks: true,
   preprocess: (MarkdownIt, source) => {
     MarkdownIt.renderer.rules.table_open = function () {
       return '<table class="table">'
@@ -91,8 +95,8 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
+        loader: 'vue-loader'
+        // options: vueLoaderConfig
       },
       {
         test: /\.js$/,
@@ -104,6 +108,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
+          esModule: false,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
@@ -125,9 +130,45 @@ module.exports = {
       },
       {
         test: /\.md$/,
-        loader: 'vue-markdown-loader',
-        options: vueMarkdown
+        loaders: [
+          {
+            loader: 'vue-loader',
+            options: {
+              compilerOptions: {
+                preserveWhitespace: false
+              }
+            }
+          },
+          {
+            loader: path.resolve(__dirname, './md-loader/index.js')
+          }
+          // 'vue-loader',
+          // {
+            // loader: 'vue-markdown-loader',
+            // options: vueMarkdown
+          //   loader: 'vue-md-loader',
+          //   options: {
+          //     rules: {
+          //       'table_open': () => '<table class="table">'
+          //     },
+          //     afterProcessLiveTemplate: function(template) {
+          //       return `<div class="live-cc">${template}</div>`
+          //     },
+          //     plugins: vueMarkdown.use
+          //   }
+          // }
+        ]
       }
     ]
-  }
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      vue: {
+        compilerOptions: {
+          preserveWhitespace: false
+        }
+      }
+    })
+  ]
 }

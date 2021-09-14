@@ -1,38 +1,42 @@
-@import "./common/var.css";
+@import "./common/var.less";
 
-@component-namespace w {
-  @b row {
+.w-row {
     position: relative;
     box-sizing: border-box;
-    @utils-clearfix;
+    &::after,&::before {
+      display:table;
+	    content:"";
+    }
+    &::after {
+      clear:both
+    }
 
-    @m flex {
+    &--flex {
       display: flex;
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         display: none;
       }
 
-      @when justify-center {
+      &.is-justify-center {
         justify-content: center;
       }
-      @when justify-end {
+      &.is-justify-end {
         justify-content: flex-end;
       }
-      @when justify-space-between {
+      &.is-justify-space-between {
         justify-content: space-between;
       }
-      @when justify-space-around {
+      &.is-justify-space-around {
         justify-content: space-around;
       }
 
-      @when align-middle {
+      &.is-align-middle {
         align-items: center;
       }
-      @when align-bottom {
+      &.is-align-bottom {
         align-items: flex-end;
       }
     }
 
   }
-}

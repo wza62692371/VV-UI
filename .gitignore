@@ -1,12 +1,14 @@
 .DS_Store
 node_modules/
 dist/
+packages/theme-default/lib/
+packages/*/lib/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 test/unit/coverage
 package-lock.json
-
+lib/
 # Editor directories and files
 .idea
 .vscode

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快鱼服饰生产制单</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        }
+
+        .table-wrap {
+        width: 1320px;
+        margin: 0 auto;
+        border-bottom: 1px solid #000;
+        border-right: 1px solid #000;
+        }
+        .table-wrap td {
+        width: 100px;
+        box-sizing: border-box;
+        line-height: 1.2;
+        height: 35px;
+        padding: 5px;
+        border-left: 1px solid #000;
+        border-top: 1px solid #000;
+        }
+        .table-wrap thead td {
+        line-height: 35px;
+        text-align: center;
+        font-weight: bold;
+        position: relative;
+        }
+        .table-wrap thead td .table-logo {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        height: 35px;
+        
+        }
+        .table-wrap .table-row-label {
+        font-weight: bold;
+        }
+        .table-wrap .table-left-img {
+        width: 200px;
+        display: block;
+        margin: 0 auto;
+        max-width: 99%;
+        max-height: 320px;
+        }
+        .table-wrap .table-row-5-img {
+        height: 90px;
+        }
+        .table-wrap .table-txt-tl {
+        text-align: left;
+        }
+        .table-wrap .table-txt-tr {
+        text-align: center;
+        }
+        .table-wrap .table-txt-rl {
+        text-align: right;
+        }
+        .table-wrap .table-size {
+        background-color: #eee;
+        font-weight: bold;
+        }
+        .table-wrap .table-row-h {
+        height: 80px;
+        line-height: 1.6;
+        }
+        .table-wrap thead tr {
+            page-break-before: always;
+            page-break-inside: avoid;
+        }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+</head>
+
+<body>
+    <table class="table-wrap">
+       
+    </table>
+    <script>
+        var data = {
+            logo: 'https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00334-2109.jpg',
+            row0: {
+                bigImg: 'https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00334-2109.jpg',
+                data1: '1', //生产制单号
+                data2: '2',//商品编码
+                data3: '3',//商品名称
+                data4: '4',//大类
+                data5: '5',//小类
+                data6: '6', //性别
+                data7: '',//面料品类
+                data8: '',//验厂编码
+                data9: '',//供应商
+                data10: '',//买手
+                data11: '',//采购
+                data12: '',//跟单
+                data13: '',//批版类型
+                data14: '',//尺码
+                data15: '',//颜色
+                data16: '',//主布名称
+                data17: '',//主布成分
+                data18: '',//配布名称
+                data19: '',//配布成分
+                data20: '',//执行标准
+                data21: '',//安全技术
+                data22: '',//批版人
+                data23: '',//制单日期
+                result: '' //批版结果
+            },
+            //尺寸指示
+            row1: {
+                size: ['xxs','xs', 's', 'm', 'l','xl','xxl','','',''], // 尺码
+                method: ['155/80A','xs', 's', 'm', 'l','xl','xxl','','',''], // 测量方法
+                name: 'M',// 样衣测量
+                col1: ['衣长(肩顶度下≤50)', '后中领骨度', '71', '71', '71', '71', '71', '71', '71', '', '', '','',''],
+                col2: ['衣长(肩顶度下≤50)', '后中领骨度', '71', '71', '71', '71', '71', '71', '71', '', '', '','',''],
+                col3: ['衣长(肩顶度下≤50)', '后中领骨度', '71', '71', '71', '71', '71', '71', '71', '', '', '','',''],
+                col4: ['衣长(肩顶度下≤50)', '后中领骨度', '71', '71', '71', '71', '71', '71', '71', '', '', '','',''],
+            },
+            //充绒充棉表
+            row2: {
+                size: ['xxs','xs', 's', 'm', 'l','xl','xxl','xxxl','XXXXL','XXXXXL'], // 尺码
+                method: ['xxs','xs', 's', 'm', 'l','xl','xxl','xxxl','XXXXL','XXXXXL'], // 测量方法
+                col1: ['', '', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A','-2/2','155/80A'],
+                col2: ['', '', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A', '155/80A','-2/2','155/80A'],
+            },
+            //工艺指示
+            row3: {
+                col1: {
+                    name: '', // 工艺名称
+                    yaoqiu: '',//工艺要求
+                },
+                col2: {
+                    name: '', // 工艺名称
+                    yaoqiu: '',//工艺要求
+                },
+            },
+            //辅料要求
+            row4: {
+                col1: {
+                    data1: '', // 辅料名称
+                    data2: '',//规格
+                    data3: '',//用量
+                    data4: '',//部位及方法									
+                },
+                col2: {
+                    data1: '', // 辅料名称
+                    data2: '',//规格
+                    data3: '',//用量
+                    data4: '',//部位及方法									
+                },
+                col3: {
+                    data1: '3', // 辅料名称
+                    data2: '32',//规格
+                    data3: '33',//用量
+                    data4: '',//部位及方法									
+                },
+            },
+            //包装要求
+            row5: {
+                col1: {
+                    data: '',
+                    img: ''
+                },
+                col2: {
+                    data: '',
+                    img: ''
+                },
+                col3: {
+                    data: '',
+                    img: 'https://ns-strategy.cdn.bcebos.com/ns-strategy/upload/fc_big_pic/part-00334-2109.jpg'
+                },
+            },
+            //批版意见
+            row6: {
+                col1: {
+                    name: '',
+                    data:'',
+                },
+                col2: {
+                    name: '',
+                    data:'',
+                },
+                data: '',// 总评语
+            },
+            //风评结果	
+            row7: {
+                col1: {
+                    data1: '',//风险评估意见	
+                    data2: '',//解决方案	
+                    data3: '',//是否需要符合	
+                    data4: '',//低风险1
+                    data5: '',//低风险2
+                },
+                col2: {
+                    data1: '',//风险评估意见	
+                    data2: '',//解决方案	
+                    data3: '',//是否需要符合	
+                    data4: '',//低风险1
+                    data5: '',//低风险2
+                },
+                col3: {
+                    data1: '',//风险评估意见	
+                    data2: '',//解决方案	
+                    data3: '',//是否需要符合	
+                    data4: '',//低风险1
+                    data5: '',//低风险2
+                }
+            }
+           
+        }
+        var myElements = `
+        <thead>
+            <tr>
+                <td colspan="14"><img class="table-logo" src="${data.logo}" alt=""> 快鱼服饰生产制单</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3" rowspan="9"><img class="table-left-img" src="${data.row0.bigImg}" alt=""></td>
+                <td class="table-row-label">生产制单号</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data1|| ''}</td>
+                <td class="table-row-label">商品编码</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data2|| ''}</td>
+                <td class="table-row-label">商品名称</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data3|| ''}</td>
+                <td colspan="2">批版结果</td>
+            </tr>
+            <tr>
+                <td class="table-row-label">大类</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data4|| ''}</td>
+                <td class="table-row-label">小类</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data5|| ''}</td>
+                <td class="table-row-label">性别</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data6|| ''}</td>
+                <td colspan="2" class="table-txt-tr">${data.row0.result|| ''}</td>
+            </tr>
+            <tr>
+                <td class="table-row-label">面料品类</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data7|| ''}</td>
+                <td class="table-row-label">验厂编码</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data8|| ''}</td>
+                <td class="table-row-label">供应商</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data9|| ''}</td>
+                <td colspan="2" class="table-txt-tr" rowspan="7">
+                    <p>温馨说明：</p>
+                    <p>工厂收到本制单时尺寸和评语如有异议要第一时间提出！</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-row-label">买手</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data10|| ''}</td>
+                <td class="table-row-label">采购</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data11|| ''}</td>
+                <td class="table-row-label">跟单</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data12|| ''}</td>
+            </tr>
+            
+            <tr>
+                <td class="table-row-label">批版类型</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data13|| ''}</td>
+                <td class="table-row-label">尺码</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data14|| ''}</td>
+                <td class="table-row-label">颜色</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data15|| ''}</td>
+            </tr>
+            <tr>
+                <td class="table-row-label">主布名称</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data16|| ''}</td>
+                <td class="table-row-label">主布成分</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data17|| ''}</td>
+                <td class="table-row-label">配布名称</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data18|| ''}</td>
+            </tr>
+            <tr>
+                <td class="table-row-label">配布成分</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data19|| ''}</td>
+                <td class="table-row-label">执行标准</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data20|| ''}</td>
+                <td class="table-row-label">安全技术</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data21|| ''}</td>
+            </tr>
+            <tr>
+                <td class="table-row-label">批版人</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data22|| ''}</td>
+                <td class="table-row-label">制单日期</td>
+                <td colspan="2"class="table-txt-tr" >${data.row0.data23|| ''}</td>
+                <td></td>
+                <td colspan="2"class="table-txt-tr" ></td>
+            </tr>
+            <tr>
+                <td class="table-row-label"></td>
+                <td colspan="2"></td>
+                <td class="table-row-label"></td>
+                <td colspan="2"></td>
+                <td class="table-row-label"></td>
+                <td colspan="2"></td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">尺寸指示</td>
+            </tr>
+            <tr class="table-row table-txt-tr">
+                <td rowspan="2">测量部位</td>
+                <td rowspan="2" class="table-txt-rl">
+                    <p class="">尺码</p>
+                    <p class="">测量方法</p>
+                </td>
+                <td>${data.row1.size[0]|| ''}</td>
+                <td>${data.row1.size[1]|| ''}</td>
+                <td>${data.row1.size[2]|| ''}</td>
+                <td>${data.row1.size[3]|| ''}</td>
+                <td>${data.row1.size[4]|| ''}</td>
+                <td>${data.row1.size[5]|| ''}</td>
+                <td>${data.row1.size[6]|| ''}</td>
+                <td>${data.row1.size[7]|| ''}</td>
+                <td>${data.row1.size[8]|| ''}</td>
+                <td>${data.row1.size[9]|| ''}</td>
+                <td  rowspan="2">公差</td>
+                <td >样衣测量</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row1.method[0]|| ''}</td>
+                <td>${data.row1.method[1]|| ''}</td>
+                <td>${data.row1.method[2]|| ''}</td>
+                <td>${data.row1.method[3]|| ''}</td>
+                <td>${data.row1.method[4]|| ''}</td>
+                <td>${data.row1.method[5]|| ''}</td>
+                <td>${data.row1.method[6]|| ''}</td>
+                <td>${data.row1.method[7]|| ''}</td>
+                <td>${data.row1.method[8]|| ''}</td>
+                <td>${data.row1.method[9]|| ''}</td>
+                <td>${data.row1.name|| ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row1.col1[0]|| ''}</td>
+                <td>${data.row1.col1[1]|| ''}</td>
+                <td>${data.row1.col1[2]|| ''}</td>
+                <td>${data.row1.col1[3]|| ''}</td>
+                <td>${data.row1.col1[4]|| ''}</td>
+                <td>${data.row1.col1[5]|| ''}</td>
+                <td>${data.row1.col1[6]|| ''}</td>
+                <td>${data.row1.col1[7]|| ''}</td>
+                <td>${data.row1.col1[8]|| ''}</td>
+                <td>${data.row1.col1[9]|| ''}</td>
+                <td>${data.row1.col1[10]|| ''}</td>
+                <td>${data.row1.col1[11]|| ''}</td>
+                <td>${data.row1.col1[12]|| ''}</td>
+                <td>${data.row1.col1[13]|| ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row1.col2[0]|| ''}</td>
+                <td>${data.row1.col2[1]|| ''}</td>
+                <td>${data.row1.col2[2]|| ''}</td>
+                <td>${data.row1.col2[3]|| ''}</td>
+                <td>${data.row1.col2[4]|| ''}</td>
+                <td>${data.row1.col2[5]|| ''}</td>
+                <td>${data.row1.col2[6]|| ''}</td>
+                <td>${data.row1.col2[7]|| ''}</td>
+                <td>${data.row1.col2[8]|| ''}</td>
+                <td>${data.row1.col2[9]|| ''}</td>
+                <td>${data.row1.col2[10]|| ''}</td>
+                <td>${data.row1.col2[11]|| ''}</td>
+                <td>${data.row1.col2[12]|| ''}</td>
+                <td>${data.row1.col2[13]|| ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row1.col3[0]|| ''}</td>
+                <td>${data.row1.col3[1]|| ''}</td>
+                <td>${data.row1.col3[2]|| ''}</td>
+                <td>${data.row1.col3[3]|| ''}</td>
+                <td>${data.row1.col3[4]|| ''}</td>
+                <td>${data.row1.col3[5]|| ''}</td>
+                <td>${data.row1.col3[6]|| ''}</td>
+                <td>${data.row1.col3[7]|| ''}</td>
+                <td>${data.row1.col3[8]|| ''}</td>
+                <td>${data.row1.col3[9]|| ''}</td>
+                <td>${data.row1.col3[10]|| ''}</td>
+                <td>${data.row1.col3[11]|| ''}</td>
+                <td>${data.row1.col3[12]|| ''}</td>
+                <td>${data.row1.col3[13]|| ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row1.col4[0]|| ''}</td>
+                <td>${data.row1.col4[1]|| ''}</td>
+                <td>${data.row1.col4[2]|| ''}</td>
+                <td>${data.row1.col4[3]|| ''}</td>
+                <td>${data.row1.col4[4]|| ''}</td>
+                <td>${data.row1.col4[5]|| ''}</td>
+                <td>${data.row1.col4[6]|| ''}</td>
+                <td>${data.row1.col4[7]|| ''}</td>
+                <td>${data.row1.col4[8]|| ''}</td>
+                <td>${data.row1.col4[9]|| ''}</td>
+                <td>${data.row1.col4[10]|| ''}</td>
+                <td>${data.row1.col4[11]|| ''}</td>
+                <td>${data.row1.col4[12]|| ''}</td>
+                <td>${data.row1.col4[13]|| ''}</td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">充绒充棉表</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td rowspan="2">测量部位</td>
+                <td rowspan="2">数量</td>
+                <td>${data.row2.size[0]|| ''}</td>
+                <td>${data.row2.size[1]|| ''}</td>
+                <td>${data.row2.size[2]|| ''}</td>
+                <td>${data.row2.size[3]|| ''}</td>
+                <td>${data.row2.size[4]|| ''}</td>
+                <td>${data.row2.size[5]|| ''}</td>
+                <td>${data.row2.size[6]|| ''}</td>
+                <td>${data.row2.size[7]|| ''}</td>
+                <td>${data.row2.size[8]|| ''}</td>
+                <td>${data.row2.size[9]|| ''}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row2.method[0]|| ''}</td>
+                <td>${data.row2.method[1]|| ''}</td>
+                <td>${data.row2.method[2]|| ''}</td>
+                <td>${data.row2.method[3]|| ''}</td>
+                <td>${data.row2.method[4]|| ''}</td>
+                <td>${data.row2.method[5]|| ''}</td>
+                <td>${data.row2.method[6]|| ''}</td>
+                <td>${data.row2.method[7]|| ''}</td>
+                <td>${data.row2.method[8]|| ''}</td>
+                <td>${data.row2.method[9]|| ''}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row2.col1[0]|| ''}</td>
+                <td>${data.row2.col1[1]|| ''}</td>
+                <td>${data.row2.col1[2]|| ''}</td>
+                <td>${data.row2.col1[3]|| ''}</td>
+                <td>${data.row2.col1[4]|| ''}</td>
+                <td>${data.row2.col1[5]|| ''}</td>
+                <td>${data.row2.col1[6]|| ''}</td>
+                <td>${data.row2.col1[7]|| ''}</td>
+                <td>${data.row2.col1[8]|| ''}</td>
+                <td>${data.row2.col1[9]|| ''}</td>
+                <td>${data.row2.col1[10]|| ''}</td>
+                <td>${data.row2.col1[11]|| ''}</td>
+                <td>${data.row2.col1[12]|| ''}</td>
+                <td>${data.row2.col1[13]|| ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td>${data.row2.col2[0]|| ''}</td>
+                <td>${data.row2.col2[1]|| ''}</td>
+                <td>${data.row2.col2[2]|| ''}</td>
+                <td>${data.row2.col2[3]|| ''}</td>
+                <td>${data.row2.col2[4]|| ''}</td>
+                <td>${data.row2.col2[5]|| ''}</td>
+                <td>${data.row2.col2[6]|| ''}</td>
+                <td>${data.row2.col2[7]|| ''}</td>
+                <td>${data.row2.col2[8]|| ''}</td>
+                <td>${data.row2.col2[9]|| ''}</td>
+                <td>${data.row2.col2[10]|| ''}</td>
+                <td>${data.row2.col2[11]|| ''}</td>
+                <td>${data.row2.col2[12]|| ''}</td>
+                <td>${data.row2.col2[13]|| ''}</td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">工艺指示</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">工艺名称</td>
+                <td colspan="12">工艺要求</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">${data.row3.col1.name || ''}</td>
+                <td colspan="12">${data.row3.col1.yaoqiu || ''}</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">${data.row3.col2.name || ''}</td>
+                <td colspan="12">${data.row3.col2.yaoqiu || ''}</td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">辅料要求</td>
+            </tr>
+            <tr>
+                <td class="table-txt-tr" colspan="2">辅料名称</td>
+                <td>规格</td>
+                <td>用量</td>
+                <td class="table-txt-tr" colspan="10">部位及方法</td>
+            </tr>
+            <tr>
+                <td class="table-txt-tr" colspan="2">${data.row4.col1.data1 || ''}</td>
+                <td>${data.row4.col1.data2 || ''}</td>
+                <td>${data.row4.col1.data3 || ''}</td>
+                <td class="table-txt-tr" colspan="10">${data.row4.col1.data4 || ''}</td>
+            </tr>
+            <tr>
+                <td class="table-txt-tr" colspan="2">${data.row4.col2.data1 || ''}</td>
+                <td>${data.row4.col2.data2 || ''}</td>
+                <td>${data.row4.col2.data3 || ''}</td>
+                <td class="table-txt-tr" colspan="10">${data.row4.col2.data4 || ''}</td>
+            </tr>
+            <tr>
+                <td class="table-txt-tr" colspan="2">${data.row4.col3.data1 || ''}</td>
+                <td>${data.row4.col3.data2 || ''}</td>
+                <td>${data.row4.col3.data3 || ''}</td>
+                <td class="table-txt-tr" colspan="10">${data.row4.col3.data4 || ''}</td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">包装要求</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">包装要求</td>
+                <td colspan="12">图片</td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">${data.row5.col1.data || ''}</td>
+                <td colspan="12"><img class="table-row-5-img" src="${data.row5.col1.img || ''}" alt=""></td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">${data.row5.col2.data || ''}</td>
+                <td colspan="12"><img class="table-row-5-img" src="${data.row5.col2.img || ''}" alt=""></td>
+            </tr>
+            <tr class="table-txt-tr">
+                <td colspan="2">${data.row5.col3.data || ''}</td>
+                <td colspan="12"><img class="table-row-5-img" src="${data.row5.col3.img || ''}" alt=""></td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="14">批版意见</td>
+            </tr>
+            <tr>
+                <td>序号</td>
+                <td class="table-txt-tr" colspan="13">批版意见</td>
+            </tr>
+            <tr>
+                <td>${data.row6.col1.name || ''}</td>
+                <td class="table-txt-tr" colspan="13">${data.row5.col1.data || ''}</td>
+            </tr>
+            <tr>
+                <td>${data.row6.col2.name || ''}</td>
+                <td class="table-txt-tr" colspan="13">${data.row5.col2.data || ''}</td>
+            </tr>
+            <tr class="table-row-h">
+                <td class="table-txt-tr">总评语</td>
+                <td colspan="13">${data.row6.data || ''}</td>
+            </tr>
+            <tr class="table-size">
+                <td colspan="11">风评结果</td>
+                <td>风险等级</td>
+                <td colspan="2">低风险</td>
+            </tr>
+            <tr>
+                <td colspan="4">风险评估意见</td>
+                <td class="table-txt-tr" colspan="5">解决方案</td>
+                <td colspan="3">是否需要符合</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4">${data.row7.col1.data1 || ''}</td>
+                <td class="table-txt-tr" colspan="5">${data.row7.col1.data2 || ''}</td>
+                <td colspan="3">${data.row7.col1.data3 || ''}</td>
+                <td>${data.row7.col1.data4 || ''}</td>
+                <td>${data.row7.col1.data5 || ''}</td>
+            </tr>
+            <tr>
+                <td colspan="4">${data.row7.col2.data1 || ''}</td>
+                <td class="table-txt-tr" colspan="5">${data.row7.col2.data2 || ''}</td>
+                <td colspan="3">${data.row7.col2.data3 || ''}</td>
+                <td>${data.row7.col2.data4 || ''}</td>
+                <td>${data.row7.col2.data5 || ''}</td>
+            </tr>
+            <tr>
+                <td colspan="4">${data.row7.col3.data1 || ''}</td>
+                <td class="table-txt-tr" colspan="5">${data.row7.col3.data2 || ''}</td>
+                <td colspan="3">${data.row7.col3.data3 || ''}</td>
+                <td>${data.row7.col3.data4 || ''}</td>
+                <td>${data.row7.col3.data5 || ''}</td>
+            </tr>
+        </tbody>`
+
+        $('.table-wrap').html(myElements)
+    </script>
+</body>
+
+</html> 

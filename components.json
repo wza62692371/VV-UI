@@ -1,0 +1,12 @@
+{
+  "button": "./packages/button/index.js",
+  "row": "./packages/row/index.js",
+  "col": "./packages/col/index.js",
+  "tag": "./packages/tag/index.js",
+  "show-more": "./packages/show-more/index.js",
+  "limit-textarea": "./packages/limit-textarea/index.js",
+  "meta-info": "./packages/meta-info/index.js",
+  "alert": "./packages/alert/index.js",
+  "loading-bar": "./packages/loading-bar/index.js",
+  "skeleton": "./packages/skeleton/index.js"
+}

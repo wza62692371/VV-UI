@@ -1,0 +1,36 @@
+@import "./common/var.less";
+.w__limit {
+    &--textarea{
+      border: @limit-textarea-border;
+      display: block;
+      resize: vertical;
+      padding: 5px 7px;
+      line-height: 1.5;
+      box-sizing: border-box;
+      width: 100%;
+      font-size: @limit-textarea-font;
+      color: @color-black;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+      &:focus {
+         border: @limit-textarea-border-focus;
+      }
+    }
+    &--over {
+      border: @limit-textarea-border-over;
+    }
+    &--text {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      font-size: 12px;
+      color: @color-base-gray;
+    }
+    &--num {
+      color: @color-success;
+    }
+    &--num-over {
+      color: @color-danger;
+    }
+  }

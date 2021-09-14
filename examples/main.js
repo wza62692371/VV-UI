@@ -5,16 +5,24 @@ import App from './App'
 import router from './router'
 import demoBlock from './components/demo-block.vue'
 import VVUI from '../packages/index'
-import '../packages/theme-default/lib/index.css'
+import i18n from './i18n/index';
+import '../packages/theme-default/src/index.less'
+import hljs from 'highlight.js';
 
 Vue.component('demo-block', demoBlock)
 Vue.use(VVUI)
 
 Vue.config.productionTip = false
-
+router.afterEach(route => {
+  Vue.nextTick(() => {
+    const blocks = document.querySelectorAll('pre code');
+    Array.prototype.forEach.call(blocks, hljs.highlightBlock);
+  });
+});
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  i18n,
   render: h => h(App)
 })

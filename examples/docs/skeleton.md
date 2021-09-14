@@ -3,27 +3,6 @@
 ## 骨架屏样式组件
 当文本没有加载出来时，显示文本的默认占位图。
 
-<div class="demo-block">
-  <w-row>
-    <w-col :span="4">
-      <w-skeleton></w-skeleton>
-    </w-col>
-    <w-col :span="4" class="ml-10">
-      <w-row>
-        <w-col :span="12">
-          <w-skeleton :proportion="0.2"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>
-        <w-col :span="24" class="m-10">
-          <w-skeleton :proportion="0.1"></w-skeleton>
-        </w-col>                  
-      </w-col>  
-    </w-col>
-  </w-row>
-</div>
-
 ::: demo
 ```html
 <w-row>
@@ -41,9 +20,9 @@
         <w-col :span="24" class="m-10">
           <w-skeleton :proportion="0.1"></w-skeleton>
         </w-col>                  
-      </w-col>  
+      </w-row>  
     </w-col>
-  </w-row>
+</w-row>
 ```
 :::
 
@@ -54,6 +33,7 @@
 #### prerender 渲染骨架屏
 本组件库骨架屏的实现也是基于预渲染去实现的，有关于预渲染更详细的介绍请参考这篇文章：<a href="https://zhuanlan.zhihu.com/p/29148760">处理 Vue 单页面 Meta SEO的另一种思路</a>
 下面我们主要介绍其实现步骤，首先我们也是需要配置webpack-plugin，不过已经有实现好的[prerender-spa-plugin](https://github.com/chrisvfritz/prerender-spa-plugin)可用
+
 ```js
 var path = require('path')
 var PrerenderSpaPlugin = require('prerender-spa-plugin')
