@@ -6,7 +6,9 @@ import router from './router'
 import demoBlock from './components/demo-block.vue'
 import VVUI from '../packages/index'
 import i18n from './i18n/index';
-import '../packages/theme-default/src/index.less'
+// import '../packages/theme-default/src/index.less'
+// import '../lib/theme-default/index.css'
+import '../lib/theme-default/button.css'
 import hljs from 'highlight.js';
 
 Vue.component('demo-block', demoBlock)

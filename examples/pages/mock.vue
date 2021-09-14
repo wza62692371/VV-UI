@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Cbutton>test</Cbutton>
+      <Cbutton>11111</Cbutton>
       <w-tag>标签一</w-tag>
       <w-cc></w-cc>
   </div>
