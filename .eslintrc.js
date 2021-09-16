@@ -1,26 +1,16 @@
-// http://eslint.org/docs/user-guide/configuring
-
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint',
-    sourceType: 'module',
-  },
   env: {
-    browser: true,
-    mocha: true,
+    node: true
   },
-  extends: ['plugin:vue/recommended', 'plugin:prettier/recommended'],
-  // required to lint *.vue files
-  plugins: ['import', 'node', 'promise', 'mocha'],
-  // add your custom rules here
+  extends: ["plugin:vue/recommended", "plugin:prettier/recommended"],
+  parserOptions: {
+    parser: "babel-eslint"
+  },
   rules: {
-    'no-unused-expressions': 0,
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    // allow async-await
-    'generator-star-spacing': 0,
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-  },
-}
+    semi: 0,
+    endOfLine: "auto",
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off"
+  }
+};

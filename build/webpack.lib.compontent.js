@@ -46,8 +46,8 @@ const webpackConfig = {
         }
       },
       {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        test: /\.(le|c)ss$/,
+        use: ['style-loader', "css-loader", 'less-loader'],
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,

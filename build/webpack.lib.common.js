@@ -1,6 +1,7 @@
 const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = require('../config/lib')
 
@@ -15,7 +16,7 @@ module.exports = {
     filename: 'cc-ui.common.js',
     chunkFilename: '[id].js',
     libraryExport: 'default',
-    library: 'ELEMENT',
+    library: 'VVUI',
     libraryTarget: 'commonjs2'
   },
   resolve: {
@@ -51,8 +52,8 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
+        test: /\.(le|c)ss$/,
+        use: ['style-loader', "css-loader", 'less-loader'],
       },
       {
         test: /\.(svg|otf|ttf|woff2?|eot|gif|png|jpe?g)(\?\S*)?$/,
