@@ -1,15 +1,15 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import demoBlock from './components/demo-block.vue'
 import VVUI from '../packages/index'
-import i18n from './i18n/index';
-// import '../packages/theme-default/src/index.less'
+import '../packages/theme-default/src/index.less'
 // import '../lib/theme-default/index.css'
 // import '../lib/theme-default/button.css'
 import hljs from 'highlight.js';
+
+
+// locale.use(lang)
 
 Vue.component('demo-block', demoBlock)
 Vue.use(VVUI)
@@ -25,6 +25,5 @@ router.afterEach(route => {
 new Vue({
   el: '#app',
   router,
-  i18n,
   render: h => h(App)
 })

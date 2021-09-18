@@ -23,12 +23,20 @@
   <w-button type="danger" plain>危险按钮</w-button>
 </div>
 <div  class="m-10">
-  <w-button round>圆形按钮</w-button>
+  <w-button round>圆角按钮</w-button>
   <w-button type="primary" round>主要按钮</w-button>
   <w-button type="success" round>成功按钮</w-button>
   <w-button type="info" round>信息按钮</w-button>
   <w-button type="warning" round>警告按钮</w-button>
   <w-button type="danger" round>危险按钮</w-button>
+</div>
+<div  class="m-10">
+  <w-button icon="w-icon-search" circle></w-button>
+  <w-button type="primary" icon="w-icon-edit" circle></w-button>
+  <w-button type="success" icon="w-icon-sad" circle></w-button>
+  <w-button type="info" icon="w-icon-write" circle></w-button>
+  <w-button type="warning" icon="w-icon-wow" circle></w-button>
+  <w-button type="danger" icon="w-icon-delete" circle></w-button>
 </div>
 
 ```
@@ -56,6 +64,20 @@
   <w-button type="info" plain disabled>信息按钮</w-button>
   <w-button type="warning" plain disabled>警告按钮</w-button>
   <w-button type="danger" plain disabled>危险按钮</w-button>
+</div>
+  
+```
+:::
+
+### 文字按钮
+
+
+::: demo
+```html
+
+<div>
+  <w-button type="text">文字按钮</w-button>
+  <w-button type="text" disabled>文字按钮</w-button>
 </div>
   
 ```
@@ -94,11 +116,34 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 ```
 :::
 
+
+### 按钮组
+
+以按钮组的方式出现，常用于多项类似操作。
+
+:::demo 使用`<el-button-group>`标签来嵌套你的按钮。
+
+```html
+<w-button-group>
+  <w-button type="primary" icon="w-icon-left">上一页</w-button>
+  <w-button type="primary">下一页<i class="w-icon-right"></i></w-button>
+</w-button-group>
+<w-button-group>
+  <w-button type="primary" icon="w-icon-edit"></w-button>
+  <w-button type="primary" icon="w-icon-share"></w-button>
+  <w-button type="primary" icon="w-icon-delete"></w-button>
+</w-button-group>
+```
+:::
+
+
 ### Attributes
 | 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | size     | 尺寸   | string  |   default,medium,small            |    —     |
-| type     | 类型   | string    |   primary,success,warning,danger,info |     —    |
+| type     | 类型   | string    |   primary,success,warning,danger,info,text |     —    |
 | plain     | 是否朴素按钮   | Boolean    | — | false   |
+| round     | 是否圆角按钮   | Boolean    | — | false   |
+| circle     | 是否圆形按钮   | Boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
 | icon  | 图标，已有的图标库中的图标名 | string   |  —  |  —  |

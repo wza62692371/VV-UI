@@ -5,7 +5,7 @@
     :disabled="disabled"
     :class="[
     'w__button--'+type,
-    {'is-plain': plain, 'is-disabled': disabled, 'is-round': round},
+    {'is-plain': plain, 'is-disabled': disabled, 'is-round': round, 'is-circle': circle},
     'w__button--size-'+size
     ]"
   >
@@ -31,7 +31,8 @@
       },
       plain: Boolean,
       disabled: Boolean,
-      round: Boolean
+      round: Boolean,
+      circle: Boolean,
     },
     data () {
       return {
