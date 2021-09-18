@@ -5,7 +5,7 @@ Limit 可以控制用户输入的字符数，```placeholder``` 指定初始输�
 
 ::: demo
 ```html
-<w-limit v-mode="content" :max-len="10" placeholder="最多输入10个字符"></w-limit>
+<w-limit v-model="content" :max-len="10" placeholder="最多输入10个字符"></w-limit>
 <script>
 export default {
   data() {
@@ -24,7 +24,16 @@ export default {
 
 ::: demo
 ```html
-<w-limit v-mode="content" :max-len="10" placeholder="最多输入10个字符" is-cut></w-limit>
+<w-limit v-model="content" :max-len="10" placeholder="最多输入10个字符" is-cut></w-limit>
+<script>
+export default {
+  data() {
+    return {
+      content: ''
+    };
+  }
+}
+</script>
 ```
 :::
 
